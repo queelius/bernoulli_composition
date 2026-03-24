@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Relational probabilities}
 \label{sec:relational}
-The relational \emph{member-of} predicate $\in : U \times 2^U$ is the set-indicator function, or the \emph{membership} predicate, which is true if $x$ is a member of the set $A$ and false otherwise.
+The relational \emph{member-of} predicate $\in : U \times 2^U \to \{0,1\}$ is the set-indicator function, or the \emph{membership} predicate, which is true if $x$ is a member of the set $A$ and false otherwise.
 By \cref{prop:element_rates}, given $x \in A$, $x \in \tilde{A}^\fprate_\tprate$ with probability $\tprate$ and given $x \notin A$, $x \in \tilde{A}^\fprate_\tprate$ with probability $\fprate$.
 These probabilities are axiomatic in the second-order random approximate set model.
 
@@ -97,12 +97,12 @@ $\fprate^2 + \tnrate^2$.
 \begin{corollary}
 	Given $X \subseteq Y$, $\tilde{X}[+][\tprate_1] \subseteq \tilde{Y}[+][\tprate_2]$ with probability
 	\begin{equation}
-	\left(1 - \tprate_1\fnrate_2\right)^{|X|}
+	\left(1 - \tprate_1\fnrate_2\right)^{|X|}.
 	\end{equation}
 \end{corollary}
 \begin{proof}
 For positive approximate sets, $\fprate_1 = \fprate_2 = 0$, so the
-second and third factors of the subset theorem vanish (each equals $1^n$).
+second and third factors of the subset theorem reduce to $1$ (each equals $1^n$).
 Only the first factor remains.
 Since $\fnrate_2 = 1 - \tprate_2$, this gives $(1 - \tprate_1 \fnrate_2)^{|X|}$.
 \end{proof}

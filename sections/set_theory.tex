@@ -468,6 +468,15 @@ The result is therefore a higher-order Bernoulli set (\cref{def:model_order}) wh
 The weighted-average rates in \cref{tab:set_ops} give the \emph{marginal} error rates over all positives (or negatives), collapsing the partition structure into a single summary statistic.
 \end{remark}
 
+\begin{remark}[Parametric parsimony of composed sets]
+\label{rem:parametric_parsimony}
+The higher-order structure might suggest a proliferation of parameters.
+A general fourth-order channel on $4$ observed symbols has $4 \times 3 = 12$ free parameters.
+However, element-wise independence (\cref{asm:element_indep}) forces the joint transition matrix to factor as a Kronecker product of per-set $2 \times 2$ channels~\cite{coverThomas}, so the union of two second-order Bernoulli sets requires only $4$ parameters ($\fprate_1, \tprate_1, \fprate_2, \tprate_2$), not $12$.
+More generally, composing $m$ independent second-order Bernoulli sets yields a model of order up to $2^m$ on an alphabet of $2^m$ observed symbols, but the parameter count grows linearly as $2m$ rather than as $2^m(2^m - 1)$.
+This Kronecker structure is precisely what makes the closed-form composition formulas in \cref{tab:set_ops} possible: each entry is a polynomial in the $2m$ per-set rates.
+\end{remark}
+
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}
@@ -524,10 +533,10 @@ By \cref{thm:union_fprate}, the union FPR is
 \end{equation}
 By \cref{thm:union_fnrate}, the union FNR is
 \begin{align}
-\fnrate &= 0.467 \times 0.05 \times (1 - 0.02)
+\fnrate &\approx 0.467 \times 0.05 \times (1 - 0.02)
          + 0.333 \times 0.03 \times (1 - 0.01)
          + 0.200 \times 0.05 \times 0.03 \notag \\
-       &= 0.02288 + 0.00990 + 0.00030 = 0.03308.
+       &\approx 0.02288 + 0.00990 + 0.00030 \approx 0.03307.
 \end{align}
 Thus $\tilde{A}_1 \cup \tilde{A}_2$ is a Bernoulli set approximating $A_1 \cup A_2$ with FPR $\approx 0.030$ and FNR $\approx 0.033$.
 \end{example}
@@ -634,9 +643,15 @@ where $\n = u - |A_1 \cup A_2|$ is the number of negatives.
 As $\n \to \infty$, the distribution converges in probability to $\tnrate_1 \tnrate_2$.
 
 \begin{remark}[Convergence of intersections of positive approximate sets]
-	Consider a sequence $\PASet{A}[\fprate_1],\ldots,\PASet{A}[\fprate_n]$ of independent positive approximate sets of the same objective set.
-	As $n \to \infty$, $\bigcap_{i=1}^{n} \PASet{A}[\fprate_i]$ converges almost surely to $\Set{A}$, since each negative element survives with probability $\prod_{i=1}^{n} \fprate_i \to 0$.
-	Dually, for negative approximate sets, $\bigcup_{i=1}^{n} \NASet{A}[\fnrate_i]$ converges almost surely to $\Set{A}$.
+	Consider independent positive approximate sets
+	$\PASet{A}[\fprate_1],\ldots,\PASet{A}[\fprate_k]$
+	of the same objective set.
+	As $k \to \infty$, $\bigcap_{i=1}^{k} \PASet{A}[\fprate_i]$ converges
+	almost surely to $\Set{A}$, since each negative element survives with
+	probability $\prod_{i=1}^{k} \fprate_i \to 0$.
+	Dually, for negative approximate sets,
+	$\bigcup_{i=1}^{k} \NASet{A}[\fnrate_i]$ converges almost surely
+	to $\Set{A}$.
 \end{remark}
 
 \begin{remark}[Monoidal structure]
